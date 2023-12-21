@@ -1,0 +1,121 @@
+.popup {
+	width: 100%;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+}
+
+.popup-content {
+	background-color: #FEFEFE;
+	height: 80%;
+	width: 80%;
+	max-width: 1000px;
+	margin: auto auto;
+	border-radius: 10px;
+	padding: 20px;
+	overflow: hidden;
+}
+
+.auth-characters {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	margin-top: 10px;
+	flex-wrap: wrap;
+	overflow: auto;
+	height: calc(100% - 45px);
+}
+
+.auth-character  {
+	display: flex;
+	background-color: #F0EAE3;
+	border: 1px solid #C28642;
+	border-radius: 5px;
+	width: calc(25% - 20px);
+	padding: 5px;
+	margin-bottom: 15px;
+	max-height: 50px;
+	cursor: pointer;
+}
+
+.auth-character-element img {
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.auth-character-image img {
+	width: 50px;
+	height: 50px;
+}
+
+.auth-character-name {
+	font-size: 22px;
+	line-height: 50px;
+	margin-left: 10px;
+}
+
+.auth-character.active {
+	padding: 4px;
+	border: 2px solid red;
+}
+
+.auth-login-container {
+	display: flex;
+}
+.auth-login-container input {
+	box-sizing: border-box;
+	border: 1px solid #E3E3E3;
+	border-radius: 5px;
+	font-size: 22px;
+	padding: 5px;
+}
+
+.auth-login-container button {
+	border-radius: 5px;
+	font-size: 22px;
+	padding: 5px 20px;
+	background-color: #3A393E;
+	color: #F6EDD0;
+	margin-left: 10px;
+}
+
+.rooms-add {
+	margin-bottom: 15px;
+}
+
+.rooms-add button {
+	border-radius: 5px;
+	font-size: 22px;
+	padding: 5px 20px;
+	background-color: #3A393E;
+	color: #F6EDD0;
+	border: 1px solid #3A393E;
+}
+
+.rooms-add button:hover {
+	border: 1px solid red;
+}
+
+.rooms-list {
+	overflow: auto;
+	height: calc(100% - 50px);
+}
+
+.rooms-item {
+	background-color: #F0EAE3;
+	border: 1px solid #C28642;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 15px;
+	height: 50px;
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 50px;
+}
+
+.rooms-item:hover {
+	border: 1px solid red;
+}

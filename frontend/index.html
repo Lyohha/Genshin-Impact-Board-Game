@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>Genshin Impact Board Game</title>
+    <link rel="stylesheet" href="styles/map.css">
+    <link rel="stylesheet" href="styles/popup.css">
+</head>
+
+<body>
+<main class="page">
+	<div class="gameboard">
+		<div id="map" class="map"></div>
+	</div>
+	<div class="interface">
+		<div class="notifys">
+			
+		</div>
+		<div class="characters"></div>
+		<div class="skills">
+			<button class="skills_cube none" js-move>
+				<img class="characters_image" src="images/skill.png" draggable="false"/>
+			</button>
+		</div>
+	</div>
+    <div class="popup" js-popup="auth">
+        <div class="popup-content auth-popup">
+            <form class="auth-login-container">
+                <input type="text" name="name" value=""/>
+                <button type="submit">Войти</button>
+            </form>
+            <div class="auth-characters"></div>
+        </div>
+    </div>
+    <div class="popup none" js-popup="rooms">
+        <div class="popup-content rooms-popup">
+            <div class="rooms-add">
+                <button>
+                    Создать комнату
+                </button>                
+            </div>
+            <div class="rooms-list">
+                
+            </div>
+        </div>
+    </div>
+</main>
+<script
+	src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<script>
+	jQuery(document).ready(function($) {
+		
+		let $map = $('.map');
+			
+		
+		for(let i = 7; i > -8; i--) {
+			let $line = $('<div class="map-line"></div>');
+			$line.css('display', 'flex');
+			for(let j = -8; j < 8; j++) {
+				let $image = $(`<img  draggable="false" src="map/12/tile-${j}_${i}.jpg" />`);
+				$line.append($image);
+			}
+			
+			$map.append($line);
+		}
+		
+	});
+			
+	var MapPosition = {
+		$map: document.getElementById('map'),
+		$jQueryMap: $('#map'),
+		$gameboard: $('.gameboard'),
+		posX: 0,
+		posY: 0,
+		prevMouseX: null,
+		prevMouseY: null,
+		move: function(e) {
+	
+			MapPosition.posX += (e.pageX - MapPosition.prevMouseX);
+			MapPosition.posY += (e.pageY - MapPosition.prevMouseY);
+			
+			if(MapPosition.posX > 0)
+				MapPosition.posX = 0;
+			if(MapPosition.posY > 0)
+				MapPosition.posY = 0;
+				
+			if(MapPosition.posX < (MapPosition.$gameboard.width() - MapPosition.$jQueryMap.width()))
+				MapPosition.posX = MapPosition.$gameboard.width() - MapPosition.$jQueryMap.width();
+			
+			if(MapPosition.posY < (MapPosition.$gameboard.height() - MapPosition.$jQueryMap.height()))
+				MapPosition.posY = MapPosition.$gameboard.height() - MapPosition.$jQueryMap.height();
+
+			MapPosition.$map.style.left = MapPosition.posX + "px";
+			MapPosition.$map.style.top = MapPosition.posY + "px";
+			
+			MapPosition.prevMouseX = e.pageX;
+			MapPosition.prevMouseY = e.pageY;
+		},
+		init: function() {			
+			MapPosition.$map = document.getElementById('map');
+			MapPosition.$map.addEventListener('mousedown', e => {
+				MapPosition.prevMouseX = e.pageX;
+				MapPosition.prevMouseY = e.pageY;
+				
+				document.addEventListener('mousemove', MapPosition.move);
+			});
+
+			MapPosition.$map.addEventListener('mouseup', e => {
+				document.removeEventListener('mousemove', MapPosition.move);
+			});
+		}
+	};
+	
+	MapPosition.init();
+	
+</script> 
+<script src="js/socket.js"></script>
+<script src="js/queue.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
